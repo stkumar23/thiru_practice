@@ -4,6 +4,9 @@
 // Ex: low = 1, high = 4. odd count = 2. [1,3]
 //
 // Author: Thiru
+//
+// Time complexity: O(1)
+// Space complexity: O(1)
 
 #include <iostream>
 

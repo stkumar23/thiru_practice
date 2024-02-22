@@ -3,6 +3,9 @@
 // Ex: [0,1,2,0,3,4,1,0,5] => [0,0,0,1,2,3,4,1,5]
 //
 // Author: Thiru
+//
+// Time complexity: O(n)
+// Space complexity: O(1)
 
 #include <iostream>
 #include <vector>
