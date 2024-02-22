@@ -1,42 +1,32 @@
-// Program to count all odd numbers in the given range, including starting and
-// ending numbers.
+// Program to count all odd numbers in the given range,
+// including starting and ending numbers.
 // Ex: low = 1, high = 5. odd count = 3. [1,3,5]
 // Ex: low = 1, high = 4. odd count = 2. [1,3]
 //
 // Author: Thiru
 
 #include <iostream>
-#include <vector>
 
+// Function to count odd numbers in the given range
+// In case the starting and/or ending number is odd number,
+// divide the range by 2 and plus 1.
+// otherwise divide the range by 2 and return the count
 
-// Function to move all zeros to the left side of the array
-// Start from last index and swap elements if non-zero is found.
-
-void moveZeroToLeft(std::vector<int>& v) {
-  int right = v.size()-1;
-  int left = right;
-
-  while (left>=0) {
-    if (v[left] != 0) {
-      int t = v[left];
-      v[left] = v[right];
-      v[right] = t;
-      right--;
-    }
-    left--;
+int countOddInRange(const int& l, const int& h) {
+  if (l%2 == 1 || h%2 == 1) {
+    return ((h-l)/2)+1;
+  } else {
+    return (h-l)/2;
   }
 }
-
 
 // main
 int main()
 {
-  std::vector<int> nums = {0,1,2,0,3,4,1,0,5};
+  int low = 1;
+  int high = 4;
 
-  moveZeroToLeft(nums);
+  std::cout<<"Odd count "<<countOddInRange(low, high)<<std::endl;
 
-  for (const auto& i: nums) {
-    std::cout<<i<<" ";
-  }
   return 0;
 }
