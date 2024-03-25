@@ -1,5 +1,5 @@
 // DSA - Queue - Queue using Linked List
-// Stack Operations: enqueue, dequeue
+// Queue Operations: enqueue, dequeue
 // Use two pointers front and rear
 //
 // Author: Thiru
