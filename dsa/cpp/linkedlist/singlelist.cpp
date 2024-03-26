@@ -30,7 +30,14 @@ public:
   }
 
   ~SinglyLinkedList() {
-    head = nullptr;
+
+    Node<T> *currNode = head;
+    while (currNode != nullptr) {
+      head = currNode->next;
+      delete currNode;
+      currNode = head;
+    }
+    head = currNode = nullptr;
   }
 
   void insertAtHead(T data) {
