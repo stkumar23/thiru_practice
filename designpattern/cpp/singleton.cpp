@@ -1,8 +1,9 @@
 // Design Pattern - Singleton
 // Creates only one object of its kind, provides single point of access
-// Only one instance of a class can be created
-// Constructor is private
+// Only one instance of a class can be created. Constructor is private
 // Use -std=c++11 and -lpthread for compilation
+//
+// Author: Thiru
 
 #include <iostream>
 #include <thread>
