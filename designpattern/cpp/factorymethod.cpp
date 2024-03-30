@@ -106,10 +106,17 @@ int main()
   CarClient *cc = new CarClient();
 
   cc->buildCar(CarType::ICE);
-  cc->getCar()->getCarType();
+  Car *c1 = cc->getCar();
+  if (c1 != nullptr)
+    c1->getCarType();
 
   cc->buildCar(CarType::BEV);
-  cc->getCar()->getCarType();
+  Car *c2 = cc->getCar();
+  if (c2 != nullptr)
+    c2->getCarType();
+
+  delete cc;
+  cc = nullptr;
 
   return 0;
 }
