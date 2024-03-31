@@ -31,7 +31,7 @@ int maxProduct(const std::vector<int>& nums)
     if (revPro == 0) revPro = 1;
 
     forPro *= nums[i];
-    revPro *= nums[i];
+    revPro *= nums[n-i-1];
 
     res = std::max(res, std::max(forPro, revPro));
   }
