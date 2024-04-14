@@ -88,6 +88,10 @@ public:
 
   void buildCar (CarType cType) {
     CarFactory cf;
+    if (m_carObject) {
+      delete m_carObject;
+      m_carObject = nullptr;
+    }
     m_carObject = cf.buildCar(cType);
   }
 
