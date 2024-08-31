@@ -1,0 +1,66 @@
+Docker
+======
+
+Docker Engine:
+--------------
+The main components are:
+  - Docker Client
+  - Docker daemon
+  - containerd
+  - runc
+
+runc:
+  It is the reference implementation of the OCI container runtime-spec.
+  It is a small, lightweight CLI wrapper for libcontainer. The runc creates the
+  containers.
+
+containerd:
+  It manages the lifecycle operations of a container, like, start, stop, pause
+  or rm.
+  In the docker engine stack, containerd sits between the daemon and runc at
+  the OCI layer.
+
+The Flow:
+  The Docker Client converts the commands into appropriate API payload and POSTs
+  them to the correct API endpoint (daemon uses REST API).
+
+  The daemon receives the command and it makes the call to containerd. It
+  communicates with containerd via a CRUD-style API over gRPC.
+
+  Containerd converts the required docker image into an OCI bundle and tells
+  runc to create a new container.
+
+  runc interfaces with the OS kernel and create a container. The container
+  process started as a child-process of runc and as soon as it is started,
+  runc will exit.
+
+  Once runc exits, associated containerd-shim process becomes the container's
+  parent. It reports the container's exit status back to daemon.
+
+Linux binaries name:
+  dockerd (the Docker daemon)
+  docker-containerd (containerd)
+  docker-containerd-shim (shim)
+  docker-runc (runc)
+
+
+Docker Commands:
+----------------
+  - To pull docker image from repository
+    docker pull <repository>:<tag>
+
+  - To view the list of all images stored in host's local cache
+    docker images
+
+  - To get the meta-data and layer data of an image
+    docker inspect <repository>:<tag>
+
+  - To delete the image
+    docker rm <image_id>
+
+  - To create and run an image in a container
+    docker run -it <image> <command>
+
+  - To connect to existing container
+    docker exec -it <container_id or name> <terminal>
+    ex: docker exec -it 12345678 /bin/bash
