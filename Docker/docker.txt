@@ -44,8 +44,43 @@ Linux binaries name:
   docker-runc (runc)
 
 
+Docker Image:
+  Docker image is a build-time constructs. Docker images are stored in image
+  registries. Image registries contain multiple image repositories. Image
+  repositories contain multiple images.
+
+  It is a loosely-connected read-only layers. Use docker inspect command to
+  view the list of layers the image has. Docker takes care of stacking these
+  layers and representing them as a single unified object. Docker uses a storage
+  driver to stack the layers and to represent them as a single object. Some
+  Linux storage drivers are overlay2, devicemapper, btrfs.
+
+  Each image is identified by a crypto ID that is hash of the config object.
+  Each layer is identified by a crypto ID that is a hash of the content it
+  contains. Images and layers are immutable.
+
+  When an image is pushed to or pulled from a docker registry, it is send in
+  compressed format. Hence, each image has a distrubution hash which is the
+  crypto ID for the compressed state. This hash is used to verify the
+  authenticity of the image.
+
+
+Docker Container:
+  Container is a run-time constructs. It is a runtime instance of an image.
+
+  Use Ctrl+PQ to exit the container without killing it. Container will run in
+  the background.
+
 Docker Commands:
 ----------------
+  - To check docker version
+    docker version
+    (this command should result in the version details of both client and
+    server)
+
+  - To check the status of the docker daemon (systemd supported host)
+    systemctl is-active docker
+
   - To pull docker image from repository
     docker pull <repository>:<tag>
 
@@ -64,3 +99,9 @@ Docker Commands:
   - To connect to existing container
     docker exec -it <container_id or name> <terminal>
     ex: docker exec -it 12345678 /bin/bash
+
+  - To delete all dangling images
+    docker prune -a
+    dangling image is an image that is no longer tagged and appears in listings
+    as <none>:<none>. This happens when accidentaly build and tag a new image
+    with existing image name and tag.
