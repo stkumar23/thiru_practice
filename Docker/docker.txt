@@ -105,3 +105,37 @@ Docker Commands:
     dangling image is an image that is no longer tagged and appears in listings
     as <none>:<none>. This happens when accidentaly build and tag a new image
     with existing image name and tag.
+
+
+Docker Networking:
+  Three major components:
+  1. Container Network Model (CNM)
+  2. libnetwork
+  3. Drivers
+
+  The CNM is the design specification. It outlines the fundamental building
+  blocks of a Docker network.
+
+  libnetwork is the real-world implementation of the CNM. Core compoenents of
+  CNM are implemented. Also, implements native service discovery, ingress-based
+  container load balancing and the network control plane and management plane
+  functionality.
+
+  Drivers extend the model by implementing the specific network topologies
+  such as VXLAN-based overlay networks. This has data plane implementation.
+
+  Three building blocks from CNM spec:
+  1. Sandbox
+  2. Endpoints
+  3. Networks
+
+  Sandbox: It is an isolated network stack. It includes Ethernet interfaces,
+  ports, routing tables and DNS config.
+
+  Endpoints: Virtual network interfaces. Like normal network interfaces, it is
+  responsible for making connections. In CNM model, endpoints connects a
+  sandbox to network. Endpoints behave like regular network adapters, they can
+  be connected to a single network. If a container needs connection to multiple
+  networks, it will require multiple endpoints.
+
+  Networks: Software implementation of 802.1d bridge (switch).
