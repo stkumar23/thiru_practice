@@ -139,3 +139,53 @@ Docker Networking:
   networks, it will require multiple endpoints.
 
   Networks: Software implementation of 802.1d bridge (switch).
+
+  Docker networking commands:
+  * docker network ls
+    Lists all networks on the local Docker host
+
+  * docker network inspect
+    Provides detailed configuration information about a Docker network
+
+  * docker network prune
+    Deletes all unused networks on a Docker host
+
+  * docket network rm
+    Deletes specific networks on a Docker host
+
+  * brctl show
+    Linux command to list the bridges on the system
+
+  * docker port <container name>
+    Command to verify container port mapping
+
+
+Containers, volumes and persistent data:
+  Every container gets its own non-persistent data. It is autmatically created
+  alongside the container and it is tied to the lifecycle of the container.
+  When the container is deleted, its non-persistent data is also removed.
+
+  Volume is used to store the container data in persist. Volume is de-coupled
+  from the container lifecycle. When the container is removed, the volume is
+  not removed. This volume can be mapped to new/other containers.
+
+  On the Linux systems, the docker volume exists at
+  /var/lib/docker/<storage-driver>/volumes
+
+  Create a volume and attach (mount) it to the container.
+
+  * docker volume create <volume name>
+    Command to create docker volume
+
+  * docker volume ls
+    Lists existing docker volumes
+
+  * docker volume inspect <volume name>
+    Inspect the docker volume. Lists storage driver details, mount point, name
+    and scope.
+
+  * docker volume prune
+    Delete all volumes which are not used by any container
+
+  * docker volume rm <volume name>
+    Delete specified volume which is not used by any container
