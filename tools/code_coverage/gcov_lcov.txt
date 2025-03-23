@@ -1,0 +1,73 @@
+Code Coverage - C++ - Using gcov and lcov
+-----------------------------------------
+
+Code coverage tells which parts of the code are executed by the test suite and
+importantly which parts are not covered. The coverate rate is specified as a
+percentage of files, functions, blocks or lines being covered.
+
+The main goal of code coverage test is the insight of which parts of the code
+get tested. It shows if all the branches are triggered or if there are any
+corner cases left untested.
+
+The tools used are gcov and lcov.
+
+gcov:
+-----
+gcov is a test coverage program. It helps to analyze the programs to help create
+more efficient, faster running code and to discover untested parts of the program.
+
+Using gcov below performance factors can be identified:
+  * how often each line of code executes
+  * what lines of code are actually executed
+  * how much computing time each section of code uses
+
+gcov works only on code compiled with GCC.
+Compile the code without optimization. It may not give as much information if
+the code is compiled with optimization. Also, place only one statement on each line.
+
+gcov uses two files for profiling. The names of these files are derived from the
+original object file by substituting the file suffix with either .gcno, or .gcda.
+The files contain coverage and profile data stored in a platform-independent format.
+
+Three steps:
+  1. Add compilation options to GCC to generate the executable and *.gcno file
+    [flags: --coverage or (-fprofile-arcs -ftest-coverage)]
+  2. Run the generated executable, which will generate the *.gcda data file
+  3. With *.gcno and *.gcda, generate the gcov file from the source code and
+    finally generate the code coverate report.
+
+The .gcno record file is generated after adding the GCC compile option
+-ftest-coverage. It contains information to reconstruct the basic block graphs
+and assign source line numbers to blocks.
+
+The .gcda record data file is generated using the  GCC compile option -fprofile-arcs
+It contains arc transition counts, value profile counts, and some summary information.
+
+GCC -fprofile-dir option may be used to store the .gcda files in a separate directory.
+  ex: -fprofile-dir=/tmp
+
+
+lcov:
+-----
+lcov (Linux Coverage Visualizer) is a tool used for code coverage measurement
+and visualization, working in conjunction with GCC's gcov to provide a user-friendly
+way to analyze test coverage and generate interactive HTML reports.
+
+Report Generation:
+  1. Generate the coverage.info data file
+    lcov --capture --directory . --output-file coverage.info
+  2. Generate a HTML report from this data file
+    genhtml coverage.info --ouput-directory out
+
+Once the report is generated, browse through the HTML pages to view the lines,
+functions, branch coverage metrics.
+
+Notes:
+------
+If an executable loads a dynamic shared object via dlopen functionality,
+-Wl,--dynamic-list-data is needed to dump all profile data.
+
+
+Reference:
+----------
+https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Gcov.html
