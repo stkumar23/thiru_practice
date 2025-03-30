@@ -1,0 +1,76 @@
+Google Test
+-----------
+It is a testing framework developed by Google team, to support writing tests
+for C++ programs. The framework supports any kind of tests, like functional
+and unit tests.
+
+Test: Individual test validates a specific functionality of the program.
+Test Suite: Multiple tests are grouped in a test suite.
+Test Fixture: Contains a common objects and subroutines that are shared by
+            multiple tests in a test suite.
+Test program: Contains multiple test suites.
+
+Assertions:
+-----------
+GoogleTest assertions are macros that resumble function calls.
+Two types of assertions:
+ASSERT_* - generates fatal failures, aborts the current function when they fail
+EXPECT_* - generates non-fatal failures, which don't abort the current function
+
+EXPECT assertions are preferred, to capture multiple failures in a test.
+However, ASSERT assertions are used when it does not make sense to continue
+when the assertion in question fails.
+
+Assertion reference: defined in the header, <gtest/gtest.h>
+
+// verifies true condition
+EXPECT_TRUE(condition) << "assertion failure message";
+ASSERT_TRUE(condition) << "assertion failure message";
+
+// verifies false condition
+EXPECT_FALSE(condition) << "assertion failure message";
+ASSERT_FALSE(condition) << "assertion failure message";
+
+// verifies val1 == val2
+EXPECT_EQ(val1, val2) << "assertion failure message";
+ASSERT_EQ(val1, val2) << "assertion failure message";
+
+// verifies val1 != val2
+EXPECT_NE(val1, val2) << "assertion failure message";
+ASSERT_NE(val1, val2) << "assertion failure message";
+
+// verifies val1 < val2
+EXPECT_LT(val1, val2) << "assertion failure message";
+ASSERT_LT(val1, val2) << "assertion failure message";
+
+// verifies val1 > val2
+EXPECT_GT(val1, val2) << "assertion failure message";
+ASSERT_GT(val1, val2) << "assertion failure message";
+
+// verifies val1 <= val2
+EXPECT_LE(val1, val2) << "assertion failure message";
+ASSERT_LE(val1, val2) << "assertion failure message";
+
+// verifies val1 >= val2
+EXPECT_GE(val1, val2) << "assertion failure message";
+ASSERT_GE(val1, val2) << "assertion failure message";
+
+// Compare two C strings equal
+EXPECT_STREQ(str1, str2) << "assertion failure message";
+ASSERT_STREQ(str1, str2) << "assertion failure message";
+
+// To compare C string with null
+EXPECT_STREQ(str1, nullptr) << "assertion failure message";
+EXPECT_STRNE(str1, nullptr) << "assertion failure message";
+
+// Compare two C strings not equal
+EXPECT_STRNE(str1, str2) << "assertion failure message";
+ASSERT_STRNE(str1, str2) << "assertion failure message";
+
+// Compare two C strings equal, ignore case
+EXPECT_STRCASEEQ(str1, str2) << "assertion failure message";
+ASSERT_STRCASEEQ(str1, str2) << "assertion failure message";
+
+// Compare two C strings not equal, ignore case
+EXPECT_STRCASENE(str1, str2) << "assertion failure message";
+ASSERT_STRCASENE(str1, str2) << "assertion failure message";
