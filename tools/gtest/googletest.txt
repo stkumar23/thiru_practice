@@ -74,3 +74,41 @@ ASSERT_STRCASEEQ(str1, str2) << "assertion failure message";
 // Compare two C strings not equal, ignore case
 EXPECT_STRCASENE(str1, str2) << "assertion failure message";
 ASSERT_STRCASENE(str1, str2) << "assertion failure message";
+
+
+Simple Tests
+------------
+To create a test:
+  * Use the TEST() macro to define and name a test function.
+  * This function does not return a value.
+  * The test result is determined by the assertions.
+  * First argument is the test suite name, the second argument is
+    the test case name.
+  ex: TEST(CheckDigitTest, SingleDigit)
+
+
+Test Fixture
+------------
+Test Fixture can be used, when two or more tests are operating on similar data.
+  * This macro is defined as TEST_F()
+  * The first argument is the name of the test fixture class, instead of test
+    suite name.
+  * The second argument is the name of the test.
+  * Write SetUp() function to prepare the objects for each test.
+  * Write TearDown() function to release any resources allocated in each test.
+  * Constructor, Descructor, SetUp and TearDown functions should be declared
+    as protected functions in the test fixture class.
+  Format: TEST_F(FixtureClassName, TestName)
+
+
+Filter
+------
+By default, a GoogleTest program runs all tests the user has defined. Filter can
+be used to execute particular test case, when the test suite contains multiple
+test cases. This is very helpful to run one or few test cases intead of running
+all the test cases.
+
+  * use the option --gtest_filter
+  ex: ./a.out --gtest_filter=CheckDigitTest.SingleDigit
+  * The format of a filter is a ‘:‘-separated list of wildcard patterns
+  * '-' can be used to exclude a test case

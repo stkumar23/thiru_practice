@@ -7,14 +7,6 @@
 #include <gtest/gtest.h>
 #include "checknumdigits.h"
 
-class CheckDigitTest : public testing::Test {
-public:
-  CheckDigitTest() {
-  }
-
-  ~CheckDigitTest() override = default;
-};
-
 // Test case - single digit
 TEST(CheckDigitTest, SingleDigit) {
   int num = 8;
