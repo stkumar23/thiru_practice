@@ -1,0 +1,37 @@
+gprof
+-----
+It is a profiling (performance analysis) tool which collects and arranges
+statistics about the program. Basically, it looks into each of your functions
+and inserts code at the head and tail of each one to collect timing information.
+Compile the program with "-pg" option. When the program is executed normally, it
+creates "gmon.out" contains raw data which the gprof tool turn into profiling
+statistics.
+
+Output
+    gprof normally produce two different styles of statistics,
+    flat profile and call graph.
+    * Flat Profile: shows the total amount of time your program spent executing
+                    each function. The functions are sorted by first by
+                    decreasing run-time spent in them, then by decreasing number
+                    of calls, then alphabetically by name.
+    * call Graph: shows how much time was spent in each function and its children.
+
+Call graph:
+    This statistics contains one or more entries each divided by lines full of
+    dashes. In each entry, the primary line is the one that starts with an index
+    number in square brackets. The end of this line says which function the
+    entry is for. The preceding lines in the entry describe the callers of this
+    function and the following lines describe its subroutines. The entries are
+    sorted by time spent in the function and its subroutines.
+
+    The primary line in a call graph entry is the line that describes the
+    function which the entry is about and gives the overall statistics for this
+    function.
+
+c++filt:
+    Use c++filt utility to demangle the C++ symbols in gprof output.
+    "--demangle" option is default in gprof, so all the function names are
+    demangled in gprof output. In case, it did not work and the output contains
+    wierd function symbols/names then use c++filt.
+
+    Command: gprof ./executable gmon.out | c++filt
