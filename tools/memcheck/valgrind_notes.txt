@@ -1,0 +1,31 @@
+valgrind
+--------
+The valgrind tool suite contains a memcheck tool which helps to detect
+memory related errors which are common in C and C++ programs.
+
+Compile the program with -g option to include the debugging information so that
+the Memcheck's error messages include exact line numbers. The valgrind tool
+can be run directly on the application which did not created with -g option.
+The tool can report the memory leak/mis-handling information, but not the
+exact line numbers where these issues are seen.In addition to -g option, use
+the optimization either -O0 or -O1. Memcheck tool is the default tool.
+  ex: g++ -g -o example example.cpp
+      valgrind --leak-check=yes ./example
+
+
+Valgrind is slower because, it uses dynamic instrumentation instead of static
+instrumentation at compile time, which leads to the high performance overhead
+that can be impractical for CPU-intensive applications.
+
+Valgrind does not require recompiling the program, it cannot detect some invalid
+memory accesses. One such bug is accessing memory out of the range of automatic
+(local) variables and global variables.
+
+Because Valgrind gets involved only at runtime, it does fence and track memory
+from malloc allocations. Unfortunately, allocation of variables on the stack is
+inherent to the already compiled program without calling any external functions
+such as malloc, so Valgrind cannot find out whether the access to stack
+memory is valid or is just an accidental runaway from a different stack object.
+Sanitizers, on the other hand, instruments all the code at compile time, when
+the compiler still knows which specific variable on the stack the program is
+trying to access and what the variable's correct stack boundaries are.
