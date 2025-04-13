@@ -1,0 +1,32 @@
+AddressSanitizer
+----------------
+It is a memory error detector tool for C/C++ programs. It is also known as ASan.
+This tool is much faster than valgrind. The only drawback is, unlike valgrind the 
+program has to be re-compiled with the below option to use the address sanitizer.
+
+To use the AddressSanitizer, the program has to be compiled with -fsanitize=address
+  ex: g++ -fsanitize=address -g -o example example.cpp
+
+Other compilation options
+  To get a reasonable performance add -O1 or higher
+  To get nicer stack traces in error messages add -fno-omit-frame-pointer
+
+// Sample program to demo the use of address sanitizer
+// compile using - g++ -fsanitize=address -O1 -g -o bufoverflow_1 bufoverflow.cpp
+
+#include <iostream>
+int main()
+{
+  
+  char *chArray = new char[10];
+  // heap-buffer-overflow
+  chArray[10] = 'c';
+
+  char stack[10];
+  // stack-buffer-overflow
+  stack[11] = 'c';
+
+  delete[] chArray;
+
+  return 0;
+}
