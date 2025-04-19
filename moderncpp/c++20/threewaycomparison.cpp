@@ -4,6 +4,7 @@
 //    (a <=> b) > 0 if a > b
 //    (a <=> b) == 0 if a and b are equal
 // Defined in the header <compare>
+// Also known as spaceship operator
 //
 // Compile with -std=c++2a
 //
