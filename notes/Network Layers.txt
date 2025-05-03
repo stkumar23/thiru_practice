@@ -1,0 +1,55 @@
+Network Layers:
+
+Physical Layer
+  The first layer is responsible for transmitting a single bit 0 or 1 over the
+  network. +5v for 1 and -5v for 0.
+  The bitrate is the number of bits that are conveyed per unit of time.
+  Focus: Transmits raw data as electrical, optical, or radio signals over the
+          physical medium.
+  Protocols: Ethernet, PPP (point to point protocol)
+
+Data Link Layer
+  The second layer is responsible for transmitting the data between directly
+  linked devices, that is – devices connected via a single hop, despite
+  possible errors. This layer sends the data in datagrams, that is in chunks.
+  Datagrams in this layer is called Frames. Frames will contain MAC addresses,
+  which are physical address, one identifying the sender and the other
+  identifying the receiver.
+  Focus: Provides reliable data link between two devices on the same network.
+  Protocols: Ethernet, PPP, IEEE 802.2
+
+The Network Layer
+  This layer is responsible for routing, that is determining the path where the
+  data will "travel". The third layer is responsible for transferring data
+  between hosts that are connected via multiple hops. It determines the route,
+  the path that the packets will travel. This layer is responsible for the
+  logical address, called IP address. In this layer, the datagrams are called
+  packets.
+  Focus: Responsible for routing packets across networks.
+  Protocols: IP, ICMP, ARP, Routing protocols (RIP, OSPF)
+
+The Transport Layer
+  The fourth layer is an end-to-end layer. That is, it is responsible for
+  communication from the source, all the way to the ultimate destination.
+  The transportation layer makes sure that the endpoints can communicate over
+  different services – for example, web and email. It allows multiplexing of
+  multiple services. The transport layer identifies which service is relevant
+  for the current communication. In addition, the transport layer may ensure
+  reliability. In this layer, datagrams are called segments.
+  Focus: Provides reliable or unreliable delivery of data between applications.
+  Protocols: TCP, UDP
+
+Session Layer:
+  Focus: Manages connections between applications.
+  Protocols: Session Control Protocol (SCP),
+  Point-to-Point Tunneling Protocol (PPTP), Session Description Protocol (SDP).
+
+Presentation Layer:
+  Focus: Handles data formatting and encryption.
+  Protocols: XDR, TLS, SSL, MIME.
+
+The Application Layer
+  This layer provides the service to the user’s application – web service,
+  Voice over IP (VoIP), network games, streaming, and so on.
+  Focus: Provides network services to user applications.
+  Protocols: HTTP, FTP, RPC, SMTP
