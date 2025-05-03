@@ -1,0 +1,113 @@
+Ethernet
+--------
+
+Versions:
+  1976 - First version of Ethernet was implemented
+  1978 - Dell, Intel, Xerox published, "Ethernet II" (DIX Ethernet)
+  1983 - IEEE 802.3 standard was released
+
+  Both Ethernet II and IEEE 802.3 standards are almost identical, both are
+  simply referred as Ethernt.
+
+Ethernet Frame:
+  An Ethernet frame is a structured packet of data used for communication over
+  Ethernet networks. It contains a preamble, destination and source MAC
+  addresses, a type field, data, and a frame check sequence (FCS).
+
+  Ethernet II
+-------------------------------------------------------------------------------------
+| Preamble | Destnation Address | Source Address | Type/Length | DATA (PAD) | CRC32 |
+-------------------------------------------------------------------------------------
+
+  IEEE 802.3
+-------------------------------------------------------------------------------------------
+| Preamble | SFD | Destnation Address | Source Address | Type/Length | DATA (PAD) | CRC32 |
+-------------------------------------------------------------------------------------------
+
+Premble (7 bytes for 802.3 or 8 bytes for Ethernet II):
+  In Ethernet II, all 8 bytes had the pattern of 10101010.
+  In 802.3, the first seven bytes has this pattern (10101010).
+  Premble is not really a part of the actual frame, it only precedes every
+  frame. It helps synchronize the receiving device's clock with the incoming
+  data. The preamble is a 7-byte piece of data that signals an Ethernet frame
+  has started. It can be thought of as a “digital handshake” that ensures the
+  recipient is on the same page about what will be sent.
+
+Start Frame Delimiter: (1 byte)
+  This marks the end of the preamble and indicates the start of the frame.
+  It's a specific bit sequence (10101011) that signals the beginning of the
+  frame payload.
+
+Destination MAC Address: (6 bytes)
+  A 6-byte (48-bit) field specifying the MAC address of the device to which the
+  frame is being sent.
+
+Source MAC Address: (6 bytes)
+  This is another 6-byte field that indicates the MAC address of the device
+  sending the frame.
+
+Type/length: (2 bytes)
+  A 2-byte field specifying either the type of protocol in the payload
+  (Ethernet II) or the length of the payload data (IEEE 802.3).
+  Ethernet II - type of the protocol - ex. IPv4, IPv6, ARP
+  IEEE 802.3 - length of the data - specifies the size of the payload. This
+  helps the recipient device to efficiently parse and process the frame.
+
+  How to differentiate, whether the ethernet frame is of Ethernet II type or
+  IEEE 802.3 type?
+  The values in the type/length portion helps here. If the value is less than or
+  equal to 1500, then it is the length of the data (IEEE 802.3 type).
+  If it has the value greater than or equal to 1536, it means Ethernet II (type)
+  The values in between have no meaning (1501 - 1535).
+
+Data and PAD: (46 to 1500 bytes)
+  The data field is the actual contents of the message, carrying the payload of
+  the Ethernet frame. Data can vary in size and includes the information to be
+  delivered to the recipient. The payload is between 46 and 1500 bytes in
+  length.
+
+CRC32: Cyclic Redundancy Check (4 bytes) (also FCS - Frame Check Sequence)
+  A 4-byte (32-bit) field for error checking. It helps the receiving device to
+  identify any errors in the frame during transmission.
+  The CRC is a checksum value calculated from the contents of the frame,
+  including the destination MAC address (excluding premble).
+
+
+Interpacket Gap (IPG):
+  It is the idle time between packets. After an Ethernet frame is sent,
+  transmitters wait a very short period of time before transmitting the next
+  frame, in order to allow the receiver to know that the transmission of a
+  frame is over.
+
+
+Ethernet Address:
+  Ethernet MAC address consists of 6 bytes.
+  ex: 00:01:42:A9:C2:DD
+      00:01:42 -> Vendor ID
+      A9:C2:DD - > Host ID
+
+  Ethernet address also consists of two special bits.
+  * First special bit indicates whether the address is unicast or multicast
+  address. Unicast represents a single device, Multicast addresses represent a
+  group of devices (ex: all printers in the network).
+
+  address: 06:b2:d9:a2:32:9e
+  Most significant byte - 06 . convert to binary - 00000110
+  The least significant bit is 0, hence, it is representing a unicast device
+
+  address: 05:b2:d9:a2:32:9e
+  Most significant byte - 06 . convert to binary - 00000101
+  The least significant bit is 1, hence, it is representing a multicast device
+
+  * Second special bit indicates whether the address is globally unique or not.
+
+  address: 06:b2:d9:a2:32:9e
+  Most significant byte - 06 . convert to binary - 00000110
+  The second least significant bit is 1, hence, this address is not globally
+  unique. IEEE never assign such address to any vendor. This address can be
+  assigned to a specific device for specific reason (ex: privacy, network
+  virtualization).
+
+  address: 05:b2:d9:a2:32:9e
+  Most significant byte - 06 . convert to binary - 00000101
+  The second least significant bit is 0, hence, this address is globally unique.
