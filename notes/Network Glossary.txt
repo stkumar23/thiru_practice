@@ -1,0 +1,71 @@
+ARP (Address Resolution Protocol)
+    The Address Resolution Protocol (ARP) is a network protocol used to map Internet Protocol (IP)
+    addresses to Media Access Control (MAC) addresses within a Local Area Network (LAN). It's essential
+    for communication because devices use IP addresses to identify each other, but actual communication
+    at the physical layer (like Ethernet) uses MAC addresses. ARP allows devices to discover the MAC
+    address associated with a known IP address, enabling them to send data packets to the correct
+    destination.
+
+FTP (File Transfer Protocol)
+    FTP is a protocol used for transferring files between two hosts. Just like telnet and HTTP,
+    one host runs the FTP server application (or daemon) and is called the FTP server while the
+    FTP client runs the FTP client application. A client connecting to the FTP server may be
+    required to authenticate before being given access to the file structure. Once authenticated,
+    the client can view directory listings, get and send files, and perform some other file
+    related functions.
+
+ICMP (Internet Control Message Protocol)
+    ICMP takes care of error-handling in the network.
+    It's primarily used for diagnostics and troubleshooting IP networks, particularly for
+    testing connectivity, packet loss, and delay.
+
+IP (Internet Protocol)
+    IP is for communication between computers. IP is a “connection-less” communication protocol.
+     IP is responsible for “routing” each packet to the correct destination.
+
+IP Spoofing
+    It refers to the creation of Internet Protocol (IP) packets with a false
+    source IP address to impersonate another computer system.
+
+TCP (Transmission Control Protocol)
+    TCP is used for transmission of data from an application to the network.
+    It is a fundamental internet protocol that ensures reliable and ordered delivery of data
+    packets between devices. It is responsible for breaking the data down into IP packets before
+    they are sent, and for assembling the packets when they arrive. If one application wants
+    to communicate with another via TCP, it sends a communication request. This request must be 
+    sent to an exact address. After a “handshake” between the two applications, TCP will set up
+    a “full-duplex” communication between the two applications. The “full-duplex” communication
+    will occupy the communication line between the two computers until it is closed by one of
+    the two applications.
+
+    TCP is used in a wide variety of applications that require reliable data transfer, including:
+    * Web browsing (HTTP)
+    * Email (SMTP, POP3, IMAP)
+    * File transfer (FTP)
+    * Remote login (SSH)
+
+Telnet
+    Telnet is a terminal emulation protocol used to access the resourses of a remote host.
+    A host, called the Telnet server, runs a telnet server application (or daemon in Unix terms)
+    that receives a connection from a remote host called the Telnet client. This connection is
+    presented to the operating system of the telnet server as though it is a terminal connection
+    connected directly (using keyboard and mouse). It is a text-based connection and usually
+    provides access to the command line interface of the host.
+
+TFTP (Trivial File Transfer Protocol)
+    It is a stripped down version of FTP. Where FTP allows a user to see a directory listing and
+    perform some directory related functions, TFTP only allows sending and receiving of files.
+    It is a small and fast protocol, but it does not support authentication. Because of this
+    inherent security risk, it is not widely used.
+
+UDP (User Datagram Protocol)
+    UDP is a network protocol used for data transmission. It's known for its speed and efficiency,
+    particularly in time-sensitive applications, but it doesn't guarantee reliable delivery or
+    packet order. UDP is connectionless, meaning it doesn't require a handshake or established
+    connection before sending data.
+
+    Usecases:
+    * VoIP
+    * Streaming
+    * Online Gaming
+    * DNS lookup

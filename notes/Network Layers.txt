@@ -53,3 +53,19 @@ The Application Layer
   Voice over IP (VoIP), network games, streaming, and so on.
   Focus: Provides network services to user applications.
   Protocols: HTTP, FTP, RPC, SMTP
+
+
+The TCP/IP model is a condensed version of the OSI reference model.
+It consists of:
+    * Application Layer
+    * Transport Layer
+    * Internet Layer
+    * Network Access Layer
+These four layers are comparable to the functions of the seven layers of the
+OSI model.
+
+Comparison: (TCP/IP model to OSI model)
+    Application     - (Application, Presentation, Session)
+    Transport       - (Transport)
+    Internet        - (Network)
+    Network Access  - (Data Link, Physical)

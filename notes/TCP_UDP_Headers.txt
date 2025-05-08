@@ -1,0 +1,86 @@
+TCP Header:
+    TCP header is 20 to 24 bytes in size
+
+    Source Port (16 bits)       | Destination Port (16 bits)
+            Sequence Number (32 bits)
+            Acknowledgement Number (32 bits)
+    Header (4 bits) | Reserved (4 bits) | Code Bits (8 bits) | Window (16 bits)
+    Checksum (16 bits)      | Urgent (16 bits)
+            Options (0 to 32 bits)
+            Data (Variable size)
+
+    Source port: This is a 16 bit field that specifies the port number of the sender.
+    Destination port: This is a 16 bit field that specifies the port number of the receiver.
+    Sequence number: The sequence number is a 32 bit field that indicates how much data is
+                    sent during the TCP session. When you establish a new TCP connection
+                    (3 way handshake) then the initial sequence number is a random 32 bit value.
+                    The receiver will use this sequence number and sends back an acknowledgment.
+                    Protocol analyzers like wireshark will often use a relative sequence number
+                    of 0 since it’s easier to read than some high random number.
+    Acknowledgment number: this 32 bit field is used by the receiver to request the next TCP
+                    segment. This value will be the sequence number incremented by 1.
+    Header: This is the 4 bit data offset field. It indicates the length of the TCP header
+                    so that we know where the actual data begins.
+    Reserved: These are 4 bits for the reserved field. They are unused and are always set to 0.
+    Flags: There are 8 bits for flags, we also call them control bits. We use them to establish
+                    connections, send data and terminate connections:
+        URG: urgent pointer. When this bit is set, the data should be treated as priority over
+            other data.
+        ACK: used for the acknowledgment.
+        PSH: this is the push function. This tells an application that the data should be transmitted
+            immediately and that we don’t want to wait to fill the entire TCP segment.
+        RST: this resets the connection, when you receive this you have to terminate the connection
+            right away. This is only used when there are unrecoverable errors and it’s not a normal
+            way to finish the TCP connection.
+        SYN: we use this for the initial three way handshake and it’s used to set the initial
+            sequence number.
+        FIN: this finish bit is used to end the TCP connection. TCP is full duplex so both parties
+            will have to use the FIN bit to end the connection. This is the normal method how we
+            end an connection.
+
+    Window: the 16 bit window field specifies how many bytes the receiver is willing to receive.
+            It is used so the receiver can tell the sender that it would like to receive more data
+            than what it is currently receiving. It does so by specifying the number of bytes
+            beyond the sequence number in the acknowledgment field.
+    Checksum: 16 bits are used for a checksum to check if the TCP header is OK or not.
+    Urgent pointer: these 16 bits are used when the URG bit has been set, the urgent pointer is
+            used to indicate where the urgent data ends.
+    Options: this field is optional and can be anywhere between 0 and 320 bits.
+
+
+UDP Header:
+    UDP header is 8 bytes in size
+
+        Source Port (16 bits) | Destination Port (16 bits)
+        Length (16 bits)      | Checksum (16 bits)
+                        Data (Variable)
+
+    Length: This field specifies the length in bytes of the UDP datagram. The minimum length is
+            8 bytes, the length of the header.
+
+Additional Notes:
+
+Port Numbers
+    A host in a network may send traffic to or receive from multiple hosts at the same time.
+    The system would have no way to know which data belongs to which application. TCP and
+    UDP solve this problem by using port numbers in their header. Common application layer
+    protocols have been assigned port numbers in the range of 1 to 1024. These ports are
+    known as well-known ports. Applications implementing these protocols listen on these
+    port numbers. TCP and UDP on the receiving host know which application to send the data
+    to based on the port numbers received in the headers.
+
+    Well known port numbers
+    (Using TCP protocol) - HTTP (80), HTTPS(443), FTP(control 21), FTP(data 20),
+                            SSH(22), Telnet(23), SMTP (25), DNS(53)
+    (Using UDP Protocol) - DNS(53), TFTP(69)
+
+
+Devices used in each level of Network Layers
+    * Physical Layer - Hubs, Cables (Ethernet, optical fiber, twisted pair, coaxial), Modem, Repeaters
+    * Data Link - Bridges, Switch (there are switch in network layer also ), NIC (Network Interface Card)
+    * Network Layer - (responsbile for creating routing table)
+                Routers, Brouters (bridge and router)
+    * Transport Layer - Gateways, Firewall
+            The gateway is a protocol converter which will translate one protocol into the other.
+            A firewall is a system designed to prevent unauthorized access to or from a private network.
+    * Application Layer - Personal Computers, Phones, Servers
