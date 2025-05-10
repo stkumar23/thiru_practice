@@ -1,0 +1,84 @@
+
+I2C (Inter Integrated Circuit)
+	I2C is a two-wire communication protocol that is commonly used to connect
+	low-speed devices like microcontrollers, I/O interfaces, A/D and D/A converters,
+	EEPROMs, and other peripherals in embedded systems.
+	SCL - serial clock carries the clock signal
+	SDA - serial data carries the data, allows master and slave devices on the
+				bus to send and receive data
+
+	I2C protocol allows for multiple slave devices to be connected to a single
+	master device, or for multiple masters controlling one or more slave devices.
+
+	In general, the I2C protocol is best applied on projects where simplicity of
+	design and low manufacturing costs are more important than speed. The
+	standard data transfer rate associated with the I2C protocol is just 100 kbps,
+	although speeds of up to 5 Mbps are possible with certain types of devices
+	that are configured to use I2C in "fast mode" or "ultra-fast mode".
+
+
+SPI (Serial Peripheral device)
+	SPI is a four-wire communication protocol that can be used to connect
+	microcontrollers to a versatile range of devices on the same serial bus,
+	including temperature and pressure sensors, A/D and D/A converters,
+	memory devices, LCDs, and more.
+	SCLK (Serial Clock)	- clock signal from master to all slave devices on the
+				serial bus
+	MOSI (Master Output Slave Input) - data o/p from master to the slave devices
+	MISO (Master Input Slave Output) - data i/p to master from the selected slave
+				device
+	SS (Slave Select) - no direct slave to slave communication. The master device
+			uses the Slave Select wire to select which slave device on the bus it will
+			be communicating with before sending a data transmission.
+
+	SPI is synchronous
+	SPI is a simple protocol with little overhead
+	SPI supports full-duplex communication
+	SPI communication does not have a means for acknowledgment or flow control
+	SPI does not use much board space
+
+
+--------------------------------------------------------
+I2C																SPI
+--------------------------------------------------------
+two wires										four wires
+(SDA, SCL)									(MOSI, MISO, SCL, SS)
+Half-duplex									Full-duplex
+Slower than SPI							Faster than I2C
+low-speed peripherals,			SD cards, digital displays,
+sensors, EEPROMs						flash memory, momeory apps
+Multi-master, 							Multi-slave	Single-master
+More power required					Low power
+Less susceptible to noise		More susceptible to noise
+(* Noise Immunity	- Noise immunity describes how well a device or system can
+										function in the presence of noise.)
+ack bit for data 						no such ack bit verification
+
+
+UART (Universal Asynchronous Receiver Transmitter.)
+	At a high-level, a UART is simply a microchip that enables communications
+	between a computing device (PC, embedded system, etc) and other equipment.
+	UART chips are used to convert inbound serial data to parallel data for the
+	system to read and conversely converts outbound parallel data to serial before
+	sending it on to other systems.
+	A UART’s main purpose is to transmit and receive serial data.
+
+	UART is hardware
+	supports full duplex
+	two pins
+	one to one communication (one device to another)
+	Slower than SPI
+	costlier than SPI
+	asynchronous communication
+	used in diagnostic displays
+
+	UART uses 2 wires: 1 for transmit (or Tx) and one for receive (or Rx)
+	UART communication is asynchronous, meaning that it is not synchronized using a clock
+	UART has a max communication distance of 15 meters
+	UART leverages shift registers to convert serial communication to parallel communication
+	UART is commonly used as a “serial port” on computers or in microcontrollers
+	UART supports full-duplex communication
+
+	UART may be better suited for applications that have to travel slightly more
+	distance such as diagnostic displays or other applications that require RS-232
+	support.
