@@ -1,0 +1,80 @@
+MQTT (Message Queuing Telemetry Transport)
+  MQTT is a lightweight, publish-subscribe messaging protocol designed for
+  machine-to-machine communication, especially in resource-constrained
+  environments like the Internet of Things (IoT). It enables devices to
+  exchange data efficiently and reliably, even with limited network bandwidth.
+
+  MQTT - Built on top of TCP/IP, Ideal for IoT
+  No direct communicaWon between clients (the data messages are always
+  forwarded via the broker).
+
+  MQTT SN - MQTT for Sensor Networks
+    MQTT-SN uses UDP, supports topic IDs (instead of names).
+
+  The MQTT protocol implements a publish-subscribe messaging mechanism,
+  involving three main actors:
+    * Publishers - produce data and send them to a broker.
+    * Subscribers - subscribe to a topic of interest, and receive notifications
+                    when a new message for the topic is available.
+    * Broker - ﬁlter data based on topic and distribute them to subscribers.
+
+MQTT Control Packet Format
+
+  Fixed Header (2 bytes) | Variable (optional, variable size) | Payload (variable size upto 256MB)
+
+  * The FIXED header contains the packet type, the size of the payload, and the
+    level of Quality of Service
+  * The Variable header contains the additional parameters based on the command
+    type. For instance, the header of the PUBLISH/SUBSCRIBE message contains
+    the TOPIC ﬁeld.
+  * The TOPIC is a string ﬁeld, without a speciﬁc format
+    ex: topic=temperature/livingroom/light1
+
+  MQTT keeps the TCP connecXon between a client and a broker open as long as
+  possible, by means of PINGREQ messages.
+
+Quality of Service (QoS)
+  * QoS 0 - Default. Fire and Forgot. Deliver atmost once
+  * QoS 1 - Deliver atleast once (duplication)
+  * QoS 2 - Deliver exactly once (no duplication)
+
+MQTT Client
+  Any application or device running the MQTT client library is an MQTT client.
+
+MQTT Broker
+  The MQTT Broker handles client connection, disconnection, subscription and
+  unsubscription requests, and routing messages.
+
+Publish–subscribe pattern
+  The publish-subscribe pattern differs from the client-server pattern in that
+  it separates the client that sends messages (publisher) from the client that
+  receives messages (subscriber). Publishers and subscribers do not need to
+  establish a direct connection, and the MQTT Broker is responsible for routing
+  and distributing all messages.
+
+MQTT Topic
+  The MQTT protocol routes messages based on topic. The topic distinguishes the
+  hierarchy by slash /, which is similar to URL paths, for example:
+    home/livingroom/light1
+    home/livingroom/light2
+    home/kitchen/dishwasher
+    home/kitchen/light
+
+  MQTT topic support the wildcards: + and #.
+    + : indicates a single level of wildcards, such as a/+ matching a/x or a/y
+    # : indicates multiple levels of wildcards, such as a/# matching a/x, a/b/c/d
+
+The MQTT Workflow
+  * Clients initiate a connection to the broker using TCP/IP, with optional
+    TLS/SSL encryption for secure communication. Clients provide authentication
+    credentials and specify a clean or persistent session.
+
+  * Clients either publish messages to specific topics or subscribe to topics
+    to receive messages. Publishing clients send messages to the broker, while
+    subscribing clients express interest in receiving messages on particular
+    topics.
+
+  * The broker receives published messages and forwards them to all clients
+    subscribed to the relevant topics. It ensures reliable message delivery
+    according to the specified Quality of Service (QoS) level and manages
+    message storage for disconnected clients based on session type.
