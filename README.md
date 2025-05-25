@@ -1,1 +1,1 @@
-# thiru_practice
+# Repository contains work from Thiru

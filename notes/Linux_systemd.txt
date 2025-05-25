@@ -1,0 +1,52 @@
+systemd
+-------
+  Systemd is a system and service manager for Linux operating systems.
+  When run as first process on boot (as PID 1), it acts as init system that
+  brings up and maintains userspace services.
+
+  Key features:
+    * Parallel Startup: Systemd speeds up the boot process by starting
+      services in parallel, reducing overall startup time.
+    * On-Demand Activation: Services can be started on-demand, optimizing
+      resource usage and improving system performance.
+    * Unit Files: Systemd uses unit files to define and manage services,
+      sockets, devices, mount points and other system resources.
+    * Integrated Logging and Monitoring: Systemd integrates with 'journalctl'
+      for centralized logging and monitoring of system events.
+
+  In systemd, unit is a confgiuration file that defines a system resource or
+  service. Different types of unit files based on their purpose:
+    * Service units (.service): Manage system services
+    * Socket units (.socket): Manage socket activation for services
+    * Target units (.target): Group units together for synchronization purposes,
+      similar to runlevels
+    * Mount units (.mount): Control mount points for file systems
+    * Timer units (.timer): Schedule tasks to be run at specific times
+
+
+  Systemd Commands:
+    * To enable a service: systemctl enable <service.name>
+    * To disable a service: systemctl disable <service.name>
+    * To start a service: systemctl start <service.name>
+    * To stop a service: systemctl stop <service.name>
+    * To restart a service: systemctl restart <service.name>
+    * To reload a service: systemctl reload <service.name>
+      reloads the service without restarting the service. ex: update to service
+      config without interrupting the service operation.
+    * To check service status: systemctl status <service.name>
+    * To switch between targets: systemctl isolate <target.name>
+
+    * To analyze time taken by each service during boot:
+        systemd-analyze  blame
+    * To view the tree of systemd services and the dependencies
+        systemd-analyze critical-chain
+
+    * Use below command to reload the systemd manager after creating new/
+      editing unit file.
+        systemctl daemon-reload
+
+  Journalctl commands:
+    * To view boot logs: journalctl -b
+    * To view previous (ex: -1 index) boot logs: journalctl -b -1
+    * To view the activities of a specific unit (ex: service, socket):
+        journalctl -u <unit.name>
