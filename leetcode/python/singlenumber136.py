@@ -12,24 +12,21 @@
 # Space complexity: O(1)
 
 from typing import List
+import functools
+import operator
 
 class SingleNumber136:
 
     # Function to find single number
-    # Using XOR to find the single occurrence of the number
-    # XOR of any number with 0 is that number
-    # XOR of any number with itself is 0
+    # Using functools reduce to find the single number
+    # operator.xor is passed to reduce function
+
     def singleNumber(self, nums: List[int]) -> int:
-        missingNumber = 0
-
-        for num in nums:
-            missingNumber ^= num
-
-        return missingNumber
+        return functools.reduce(operator.xor, nums, 0)
 
 # main
 obj = SingleNumber136()
 
-nums = [2,2,1]
-#nums = [4,1,2,1,2]
+#nums = [2,2,1]
+nums = [4,1,2,1,2]
 print("Single Number ", obj.singleNumber(nums))
