@@ -1,0 +1,14 @@
+[Unit]
+Description=Simple Service written in C++
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/simpleservice
+Restart=always
+# add your user and group details here
+#User=your_user
+#Group=your_group
+
+[Install]
+WantedBy=multi-user.target
