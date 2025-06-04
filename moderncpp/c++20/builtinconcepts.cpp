@@ -3,7 +3,6 @@
 // Use the keywords requires or concept
 //
 // Defined in the header <concepts>
-// Also known as spaceship operator
 //
 // Compile with -std=c++2a
 //
@@ -45,7 +44,7 @@ int main()
 {
   int a{2};
   int b{20};
-  
+
   float c{1};
   float d{2};
 
