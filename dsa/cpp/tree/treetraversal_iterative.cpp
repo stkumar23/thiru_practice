@@ -7,7 +7,7 @@
 // Author: Thiru
 //
 // Time Complexity: O(n) - For all orders
-// Space Complexity: O(1)
+// Space Complexity: O(h) - height of tree
 
 #include <iostream>
 #include <stack>
