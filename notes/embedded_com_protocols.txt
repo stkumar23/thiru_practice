@@ -39,20 +39,20 @@ SPI (Serial Peripheral device)
 
 
 --------------------------------------------------------
-I2C																SPI
+I2C									SPI
 --------------------------------------------------------
-two wires										four wires
-(SDA, SCL)									(MOSI, MISO, SCL, SS)
-Half-duplex									Full-duplex
-Slower than SPI							Faster than I2C
+two wires						four wires
+(SDA, SCL)						(MOSI, MISO, SCL, SS)
+Half-duplex						Full-duplex
+Slower than SPI					Faster than I2C
 low-speed peripherals,			SD cards, digital displays,
-sensors, EEPROMs						flash memory, momeory apps
-Multi-master, 							Multi-slave	Single-master
-More power required					Low power
+sensors, EEPROMs				flash memory, momeory apps
+Multi-master, 					Multi-slave	Single-master
+More power required				Low power
 Less susceptible to noise		More susceptible to noise
 (* Noise Immunity	- Noise immunity describes how well a device or system can
 										function in the presence of noise.)
-ack bit for data 						no such ack bit verification
+ack bit for data 				no such ack bit verification
 
 
 UART (Universal Asynchronous Receiver Transmitter.)
@@ -62,6 +62,12 @@ UART (Universal Asynchronous Receiver Transmitter.)
 	system to read and conversely converts outbound parallel data to serial before
 	sending it on to other systems.
 	A UART’s main purpose is to transmit and receive serial data.
+	Data is transmitted as frames.
+	UART FRames consist of
+		* Start/Stop bits
+		* Data bits (5-9 bits, LSB first)
+		* Parity bit (optional, used for error detection). Indicates Even or odd parity (number of 1s in the data bits)
+			(0 - for even parity, 1 - odd parity)
 
 	UART is hardware
 	supports full duplex
@@ -72,8 +78,9 @@ UART (Universal Asynchronous Receiver Transmitter.)
 	asynchronous communication
 	used in diagnostic displays
 
-	UART uses 2 wires: 1 for transmit (or Tx) and one for receive (or Rx)
+	UART uses 2 wires: 1 for transmit (or Tx) and one for receive (or Rx) (Plus Ground)
 	UART communication is asynchronous, meaning that it is not synchronized using a clock
+		(transmitter and receiver do not share a common clock)
 	UART has a max communication distance of 15 meters
 	UART leverages shift registers to convert serial communication to parallel communication
 	UART is commonly used as a “serial port” on computers or in microcontrollers
@@ -82,3 +89,4 @@ UART (Universal Asynchronous Receiver Transmitter.)
 	UART may be better suited for applications that have to travel slightly more
 	distance such as diagnostic displays or other applications that require RS-232
 	support.
+
