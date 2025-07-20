@@ -1,0 +1,48 @@
+Build Yocto image for Raspberrypi 3
+-----------------------------------
+This note describes how to build yocto image for raspberrypi 3
+
+  * mkdir yocto
+  * cd yocto
+  * mkdir sources
+  * cd sources
+  * Clone Poky source (used dunfell branch for all the sources)
+    git clone git://git.yoctoproject.org/poky -b dunfell
+  * Clone raspberrypi meta layer
+    git clone git://git.yoctoproject.org/meta-raspberrypi -b dunfell
+  * Clone openembedded layer
+    git clone https://git.openembedded.org/meta-openembedded -b dunfell
+  * cd ..
+  * source sources/poky/oe-init-build-env build_pi
+
+  * Now add the layers for the build 
+    bitbake-layers add-layer ../sources/meta-raspberrypi/
+    bitbake-layers add-layer ../sources/meta-openembedded/meta-oe/
+    bitbake-layers add-layer ../sources/meta-openembedded/meta-python/
+    bitbake-layers add-layer ../sources/meta-openembedded/meta-multimedia/
+    bitbake-layers add-layer ../sources/meta-openembedded/meta-networking/
+
+  * Run the below command to verify that all the meta layers are added to the bblayers.conf
+    bitbake-layers show-layers
+
+  * Creating the image for raspberrypi 3 - x64
+    Add "raspberrypi3-64" as MACHINE in the local.conf file
+    MACHINE = "raspberrypi3-64"
+
+  * Enable UART in local.conf. This will add UART config in the config.txt file in boot partition
+    ENABLE_UART = "1"
+
+  * Start the build
+    bitbake rpi-hwup-image
+    ( WARNING: rpi-hwup-image-1.0-r0 do_image: The image 'rpi-hwup-image' is deprecated, please use 'core-image-base' instead
+     So it would be best to use core-image-base instead of rpi-hwup-image)
+  * Once the build is completed, unzip the bz2 file located in build_pi/tmp/deploy/images/raspberrypi3-64
+    bzip2 -d -f rpi-hwup-image-raspberrypi3-64.wic.bz2
+  * Flash the rpi-hwup-image-raspberrypi3-64.wic into USB drive and load it into raspberrypi3
+  * Make UART serial connection with pi board. Use the USB TTL board and make below connection
+    - USB TTL TX pin to Pi RX pin
+    - USB TTL RX pin to Pi TX pin
+    - USB TTL Ground pin to Pi Ground pin
+  * Open Minicom and set the correct serial port settings (/dev/ttyUSB0, baud rate 115200)
+  * Power on Pi board
+  * Pi boot message is displayed in the minicom and once the booting is completed, the login prompt appears
