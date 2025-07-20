@@ -1,0 +1,51 @@
+UART Serial Port communication in Arduino Uno board using USB TTL
+-----------------------------------------------------------------
+This exercise demonstrates that using USB TTL, Arduino board LED
+can be programmed (ON, OFF) using the input from serial port pin (UART).
+
+* Connect Arduino board to the PC
+* Write below sample program in IDE and upload that to the board
+        // LED is programmed using the PIN 13
+        int led = 13;
+        int input = 0;
+
+        void setup() {
+            // put your setup code here, to run once:
+            Serial.begin(9600); // serial port baudrate
+            pinMode(led, OUTPUT);
+        }
+
+        void loop() {
+            // put your main code here, to run repeatedly:
+            if (Serial.available() > 0) {
+                input = Serial.read();
+                delay(10);
+
+                if (input == '1') {
+                    digitalWrite(led, HIGH);
+                    Serial.println("LED is ON");
+                }
+            
+                if (input == '0') {
+                    digitalWrite(led, LOW);
+                    Serial.println("LED is OFF");
+                }
+            }
+        }
+* Disconnect the board from PC and remove the power cable
+* Use the USB TTL board and make below connection
+    - USB TTL TX pin to Arduino RX pin
+    - USB TTL RX pin to Arduino TX pin
+    - USB TTL 5v pin to Arduino 5v pin
+    - USB TTL Ground pin to Arduino Ground pin
+* Now, connect the USB TTL to USB port of PC, make sure that the Arduino board's power led is ON
+* Open the IDE, from Tools menu, select the board as Arduino and port as "/dev/ttyUSB0"
+* Open the Serial Monitor from the Tools menu
+* Type 1 and enter. Verify that board's LED (L) is ON. Check the output "LED is ON" in the Serial Monitor
+* Type 0 and enter. Verify that board's LED (L) is OFF. Check the output "LED is OFF" in the Serial Monitor
+
+Troubleshooting:
+* In case, the serial port is failed to connect, make sure that dialout is set as the group owner of the port.
+        ls -l /dev/ttyUSB0
+        crw-rw-rw- 1 root dialout 188, 0 Jul 19 23:06 /dev/ttyUSB0
+ * Also, run the below command to set the permission. sudo chmod a+rw /dev/ttyUSB0
