@@ -90,3 +90,47 @@ UART (Universal Asynchronous Receiver Transmitter.)
 	distance such as diagnostic displays or other applications that require RS-232
 	support.
 
+
+I2C vs SPI vs UART
+
+	*	I2C uses a two-wire interface where slave devices share the data and clock lines. 
+		Because of this, adding multiple devices to the bus is simple and reduces complexity 
+		of the circuit. I2C also includes flow control and error handling, making it a more 
+		reliable protocol. I2C can support multi-masters in a configuration, while SPI can only 
+		support one master.
+
+	*	SPI is superior in speed compared to I2C. Its push-pull drivers offer enhanced speed and 
+		signal integrity and its full-duplex support means master and slave devices can send data 
+		at the same time, allowing for even quicker data exchanges. While SPI has a speed advantage,
+		it is more difficult and costlier to add multiple slave devices to the bus. This is because 
+		each slave needs its own slave select line, so the number of wires needed to communicate 
+		increases with each device.
+
+	*	Unlike communication protocols like I2C and SPI, UART is a physical circuit. While SPI 
+		and I2C use a master/slave paradigm to control devices and send data, UART communication 
+		incorporates two UART devices to send and receive the data. It also doesn’t operate using 
+		a clock so it is necessary for the baud rates of each UART to be within 10% of each other 
+		to prevent data loss.
+	
+	*	Both I2C and UART implement a two-wire interface to send and receive data and is often 
+		ideal for low-speed data transmission. UART and I2C also both share error checking 
+		mechanisms to help ensure data integrity: I2C uses an ACK/NACK bit and UART uses a parity 
+		bit to distinguish any changes in data during transmission.
+
+	*	Both UART and SPI support full-duplex communication and cannot support a multi-master 
+		configuration. However, SPI is much faster in speed compared to UART and I2C.
+
+
+Applications:
+
+	*	I2C is often a good choice for connecting short-distanced, low-speed devices like 
+		microcontrollers, EEPROMs, I/O interface, and other peripheral devices like sensors in 
+		an embedded system.
+	
+	*	SPI is also often used for connecting short-distanced devices within an embedded system, 
+		but it is also ideal for memory applications. For instance, many memory devices like SD 
+		cards, multi-media cards, EEPROMs, and Flash memory use SPI to store data that can easily 
+		be erased/rewritten as needed.
+	
+	*	UART is often used as a form of device-to-device communication in computer and microcontroller 
+		applications.
