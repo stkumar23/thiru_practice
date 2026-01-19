@@ -1,0 +1,75 @@
+Protocol Buffers:
+    Protocol buffers are language-neutral, platform-neutral extensible
+    mechanism for serializing structured data.
+    * Compact data storage
+    * Fast parsing
+    * Optimized functionality through automatically-generated classes
+    * .proto file extension
+
+Versions:
+    proto2, proto3, editions
+
+How it works:
+    * Create a .proto file to define data structure
+    * Generate code using the protoc compiler
+    * Compile PB (auto-generated source for the proto file) code with project code
+    * Use PB classes to serialize, share and de-serialize data
+
+How to define:
+
+    Package declaration helps to prevent naming conflicts between different projects. 
+    Similar to C++ namespace definition.
+
+    message: fundamental unit for defining the structure of data
+    Each field in the message has a unique field number.
+    
+    optional: The field either set or unset. When it is set, it contains a value and
+    it will be serialized to the wire. When unset, it will return default value. it
+    will not be serialzied to the wire.
+
+    required: do not use. Remvoed from proto3 and editions.
+
+    repeated: A field type can be repeated zero or more times in a well-formed message
+
+    map: this is a paired key/value field type
+
+    C/C++ style comments can be added in the proto file
+        // or /* ... */
+
+    For C++, the compiler generates a .h and .cc file from each .proto, 
+    with a class for each message type described in your file.
+
+Field data types:
+    double, float, int32, int64, uint32, uint64, sint32, sint64, bool, string, bytes
+    *sint32, sint64, signed int, much efficient than int32, int64 to represent negative numbers
+
+    default field value:
+        string: empty string
+        bool: false
+        numeric types: 0
+        bytes: empty bytes
+
+Sample message:
+
+    syntax = "proto2";
+
+    package sample;
+
+    enum PhoneType {
+        PHONE_TYPE_UNSPECIFIED = 0;
+        PHONE_TYPE_MOBILE = 1;
+        PHONE_TYPE_HOME = 2;
+        PHONE_TYPE_WORK = 3;
+    }
+
+    message PhoneNumber {
+        string number = 1;
+        PhoneType type = 2;
+    }
+
+    message Person {
+        string name = 1;
+        int32 id = 2;
+        string email = 3;
+        repeated PhoneNumber phones = 4;
+    }
