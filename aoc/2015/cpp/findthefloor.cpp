@@ -10,7 +10,7 @@
 #include <string>
 
 int main() {
-    std::ifstream file("day1input.txt");
+    std::ifstream file("../day1input.txt");
     std::string line;
     int floor {0};
 
